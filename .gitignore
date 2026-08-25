@@ -1,0 +1,30 @@
+# Cloned third-party repos are scratch space for inspection/summarization
+# only -- not committed here (they're other people's repos, with their
+# own licenses and history; committing them would also create nested
+# .git directories, which git handles badly).
+repos/*
+!repos/.gitkeep
+
+# --- Credentials: never commit ---
+# setup_github.sh runs `git add .` followed by `gh repo create --public`,
+# so anything not excluded here goes straight into a PUBLIC repo.
+# massi.txt / massi.txt.pub in this directory look like an OpenSSH
+# keypair (private key + .pub). Excluded by name and by pattern.
+massi.txt
+massi.txt.pub
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+id_ecdsa*
+*.ppk
+.env
+.env.*
+*_rsa
+*_ed25519
+
+# Local build/test scratch
+__pycache__/
+*.pyc
+.venv/
+venv/

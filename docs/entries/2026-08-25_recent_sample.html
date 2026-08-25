@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Error-Correcting-Code Journal — recent sample (built 2026-08-25, papers from Aug 3–19)</title>
+<style>
+:root { color-scheme: light dark; }
+body {
+  max-width: 780px; margin: 2rem auto; padding: 0 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid #8883; padding-bottom: 0.3rem; }
+h3 { font-size: 1.05rem; margin-top: 1.5rem; }
+nav.top { margin-bottom: 1.5rem; font-size: 0.9rem; }
+nav.top a { margin-right: 1rem; }
+code, pre { background: #80808022; border-radius: 4px; }
+pre { padding: 0.75rem; overflow-x: auto; font-size: 0.85rem; }
+code { padding: 0.1rem 0.3rem; }
+pre code { padding: 0; background: none; }
+.archive-year { margin-top: 1.5rem; font-weight: 600; }
+.archive-list { list-style: none; padding-left: 0; }
+.archive-list li { padding: 0.15rem 0; }
+.archive-list a { text-decoration: none; }
+.archive-list a:hover { text-decoration: underline; }
+.meta { color: #888; font-size: 0.9rem; }
+hr { border: none; border-top: 1px solid #8883; margin: 1.5rem 0; }
+footer { margin-top: 3rem; font-size: 0.85rem; color: #888; }
+</style>
+</head>
+<body>
+<nav class="top"><a href="../index.html">Index</a><a href="../archive.html">Full archive</a></nav>
+<h1>Error-Correcting-Code Journal — recent sample (built 2026-08-25, papers from Aug 3–19)</h1>
+<p>This is <strong>not</strong> a "today" entry — it's a demonstration built from papers whose full abstract pages I was actually able to fetch this session (unlike the 25 Aug entry, which hit a persistent rate limit on its one candidate paper). Every fact below is confirmed from a real page fetch, including the absence of a GitHub link — that's a genuine negative result, not a placeholder.</p>
+<h2>Papers with available code</h2>
+<p><em>None found among the papers checked below.</em> This isn't a claim that no ECC paper from this window has code — only these two specific papers were fully checked this session.</p>
+<h2>Papers without available code (confirmed)</h2>
+<h3><a href="https://arxiv.org/abs/2608.02773">Quantum error correction at ultra-low overhead</a></h3>
+<p><strong>Authors:</strong> Zhide Lu, Weikang Li, Dong-Ling Deng <strong>arXiv:</strong> 2608.02773 · <strong>Published:</strong> 3 Aug 2026 · <strong>Subjects:</strong> quant-ph</p>
+<p><strong>Code status: confirmed absent.</strong> Fetched the full abstract page; no Comments field present, and no GitHub/repo link anywhere in the abstract text.</p>
+<p><strong>Summary:</strong> Introduces "Cornucopia codes" — a family of hardware-efficient quantum LDPC codes achieving an encoding rate above 1/2 with a pseudo-threshold above 0.4% under circuit-level noise. Built around a structured code geometry co-designed with neutral-atom-array reconfiguration, so all X- and Z-type stabilizer checks are measured in parallel using only 12 entangling layers regardless of code size. Headline result: a single [[2844,1426,18]] code block encodes 1,426 distance-18 logical qubits at an extrapolated logical error rate of 2.6×10⁻¹⁶ per qubit per cycle (physical error rate 0.1%) — versus needing 68,000+ physical qubits for a comparable bivariate-bicycle-code implementation.</p>
+<hr>
+<h3><a href="https://arxiv.org/abs/2608.18961">Subsystem Symmetries and Fracton Models in Quantum Error Correction</a></h3>
+<p><strong>Authors:</strong> Giovanni Canossa <strong>arXiv:</strong> 2608.18961 · <strong>Published:</strong> 19 Aug 2026 · <strong>Subjects:</strong> quant-ph; cond-mat.stat-mech</p>
+<p><strong>Code status: confirmed absent.</strong> Fetched the full abstract page; Comments field reads only "160 pages, 16 figures" — no repo link.</p>
+<p><strong>Summary:</strong> A 160-page PhD thesis connecting classical 3D self-dual Ising models (Tetrahedral and Fractal Ising models) with subsystem symmetries to fracton topological order and quantum error correction, via Kramers-Wannier-type duality. Main result: the optimal code-capacity threshold of the Checkerboard code is determined to be 0.107(3), which saturates the theoretical limit for CSS codes — the highest optimal error threshold known among 3D codes. Uses a statistical-mechanical mapping to relate this saturation to a generalized entropy relation for dual classical spin models.</p>
+<hr>
+<h2>What this demonstrates about the pipeline</h2>
+<p>The GitHub-detection logic (<code>find_github_repo</code>) and the cloning/summarization logic (<code>clone_repo</code>, <code>summarize_repo</code>) were separately tested against a <strong>real, existing</strong> QEC repository (<code>quantumgizmos/bias_tailored_qldpc</code>) in this session and confirmed working — see the project README's "Tested" section. These two entries show the <em>other</em> half working correctly: honestly reporting "no code found" rather than fabricating a link when a paper genuinely doesn't have one.</p>
+<footer>Generated by <code>scripts/build_site.py</code> from <code>journal/*.md</code>.</footer>
+</body>
+</html>

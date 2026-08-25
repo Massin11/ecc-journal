@@ -1,0 +1,65 @@
+name: Daily ECC Journal
+
+# Runs the pipeline every day without needing Claude or any manual
+# trigger: fetches today's papers, rebuilds the full static site
+# (docs/) from all journal entries, and deploys it to GitHub Pages.
+# Requires no secrets -- arXiv's API, GitHub cloning, and GitHub Pages
+# deployment via GITHUB_TOKEN are all available with no extra setup.
+#
+# One-time manual step (can't be automated from here): in your repo's
+# Settings -> Pages, set "Source" to "GitHub Actions". After that,
+# this workflow handles everything else on its own.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # 06:00 UTC daily
+  workflow_dispatch: {}   # allows manual "Run workflow" trigger too
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  run-journal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch today's papers
+        run: python3 scripts/ecc_journal.py
+
+      - name: Rebuild static site from all journal entries
+        run: python3 scripts/build_site.py
+
+      - name: Commit journal + site source back to the repo
+        run: |
+          git config user.name "ecc-journal-bot"
+          git config user.email "actions@github.com"
+          git add journal/ docs/
+          git diff --cached --quiet || git commit -m "Daily ECC journal: $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Upload docs/ as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: run-journal
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
